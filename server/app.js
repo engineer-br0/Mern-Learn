@@ -1,14 +1,12 @@
 const express = require("express");
-const dotenv = require("dotenv");
+require("dotenv").config();
 
 const app = express();
 
-dotenv.config();
-
 const PORT = process.env.PORT;
-console.log(PORT);
 
 require('./db/conn');
+//const User = require('./model/userSchema');
 
 //Middleware
 
@@ -17,6 +15,7 @@ const middleware = (req, res, next) =>{
     next();
 }
 
+//routing
 app.get('/',  (req, res) =>{
     res.send("hello from server");
 })
@@ -38,5 +37,5 @@ app.get('/signup', (req, res) =>{
 })
 
 app.listen(PORT, () =>{
-    console.log("server is runniing")
+    console.log(`server is runniing on PORT ${PORT}`);
 })
