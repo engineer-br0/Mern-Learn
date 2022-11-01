@@ -5,8 +5,12 @@ const app = express();
 
 const PORT = process.env.PORT;
 
+//connecting mongodb database
 require('./db/conn');
 //const User = require('./model/userSchema');
+
+//connecting router
+app.use(require('./router/auth'));
 
 //Middleware
 
