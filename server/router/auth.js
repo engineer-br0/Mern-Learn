@@ -12,18 +12,36 @@ router.get('/register',  (req, res) =>{
 
 })
 
-router.post('/register', (req, res) =>{
-    console.log(req.body);
+router.post('/register', async (req, res) =>{
+    console.log("res.body:", req.body);
     //res.send("rregister page");
     //res.json({message: req.body});
+     
+    const {name, email} = req.body.message;
+    if(!name || !email){
+        return res.status(422).send({error: "please fill all the mandatory fields"});
+    }
 
-    const user = new User({name : req.body.name});
+    const user = new User({name : name, email});
 
-    user.save().then(() =>{
-        res.json({message: "user successfully registered"})
-    }).catch((err) =>{
-        res.json({error: "failed to register"})
-    })
+    // user.save().then(() =>{
+    //     res.json({message: "user successfully registered"})
+    // }).catch((err) =>{
+    //     res.json({error: "failed to register"})
+    // })
+     
+    try{
+    const userRes = await user.save();
+
+    if(userRes){
+        res.send({message: "user successfully registered"})
+    }
+    else{
+        res.send({error: "failed to register"})
+    }
+} catch(err){
+    console.log(err);
+}
 
 })
 
