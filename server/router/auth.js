@@ -31,15 +31,20 @@ router.post('/register', async (req, res) =>{
     // })
      
     try{
-    const userRes = await user.save();
+        const userExist = await User.findOne({email: email});
+        if(userExist){
+            return res.status(422).send({error: "user already registered"});
+        }
 
-    if(userRes){
+        const userRes = await user.save();
+
+        if(userRes){
         res.send({message: "user successfully registered"})
-    }
-    else{
+        }
+        else{
         res.send({error: "failed to register"})
-    }
-} catch(err){
+        }
+    } catch(err){
     console.log(err);
 }
 
