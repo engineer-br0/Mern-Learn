@@ -9,6 +9,8 @@ const PORT = process.env.PORT;
 require('./db/conn');
 //const User = require('./model/userSchema');
 
+app.use(express.json());
+
 //connecting router
 app.use(require('./router/auth'));
 
@@ -20,9 +22,9 @@ const middleware = (req, res, next) =>{
 }
 
 //routing
-app.get('/',  (req, res) =>{
-    res.send("hello from server");
-})
+// app.get('/',  (req, res) =>{
+//     res.send("hello from server home");
+// })
 
 app.get('/about', middleware, (req, res) =>{
     res.send("hello from about");
