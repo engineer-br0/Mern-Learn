@@ -13,16 +13,16 @@ router.get('/register',  (req, res) =>{
 })
 
 router.post('/register', async (req, res) =>{
-    console.log("res.body:", req.body);
-    //res.send("rregister page");
+    console.log("req.body:", req.body);
     //res.json({message: req.body});
      
-    const {name, email} = req.body.message;
-    if(!name || !email){
+    const {name, email, password, work, from} = req.body.message;
+    if(!name || !email || !password){
         return res.status(422).send({error: "please fill all the mandatory fields"});
     }
 
-    const user = new User({name : name, email});
+    //creating new user 
+    const user = new User({name : name, email, work, from, password});
 
     // user.save().then(() =>{
     //     res.json({message: "user successfully registered"})
@@ -35,7 +35,9 @@ router.post('/register', async (req, res) =>{
         if(userExist){
             return res.status(422).send({error: "user already registered"});
         }
-
+         
+        
+        //miidleware should be called for bcrypting
         const userRes = await user.save();
 
         if(userRes){
@@ -48,6 +50,30 @@ router.post('/register', async (req, res) =>{
     console.log(err);
 }
 
+})
+
+router.post('/signin', async (req, res) =>{
+    console.log(req.body);
+
+    const { email, password} = req.body;
+
+    if(!email || !password){
+        return res.send("please fill all mandatory fields");
+    }
+
+    try{
+    const userExist = await User.findOne({email: email, password:password});
+
+    if(userExist){
+        console.log(userExist);
+        return res.send(userExist);
+    }
+    else{
+        return res.send("username/ password is incorrect")
+    }
+    }catch(err){
+        console.log(err);
+    }
 })
 
 module.exports = router;
