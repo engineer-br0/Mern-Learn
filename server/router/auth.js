@@ -16,7 +16,7 @@ router.post('/register', async (req, res) =>{
     console.log("req.body:", req.body);
     //res.json({message: req.body});
      
-    const {name, email, password, work, from} = req.body.message;
+    const {name, email, password, work, from} = req.body;
     if(!name || !email || !password){
         return res.status(422).send({error: "please fill all the mandatory fields"});
     }
