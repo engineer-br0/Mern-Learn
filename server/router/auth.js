@@ -5,12 +5,13 @@ const User = require('../model/userSchema');
 
 router.get('/',  (req, res) =>{
     res.send("hello from router home");
-
+    
 })
 
+let token;
 router.get('/register',  (req, res) =>{
+    res.cookie("jwtoken", token);
     res.send("hello from router register");
-
 })
 
 router.post('/register', async (req, res) =>{
@@ -69,7 +70,9 @@ router.post('/signin', async (req, res) =>{
         
         if(passMatch){ //successfully sign in
 
-        let token = await userExist.generateAuthToken();
+        token = await userExist.generateAuthToken();
+
+        //res.cookie("jwtoken", "token");
         console.log(userExist);
         return res.send(userExist);
         }
