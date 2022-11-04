@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const bcrypt = require('bcrypt');
 const User = require('../model/userSchema');
 
 router.get('/',  (req, res) =>{
@@ -13,17 +14,17 @@ router.get('/register',  (req, res) =>{
 })
 
 router.post('/register', async (req, res) =>{
-    console.log("req.body:", req.body);
+    //console.log("req.body:", req.body);
     //res.json({message: req.body});
      
     const {name, email, password, work, from} = req.body;
+    
     if(!name || !email || !password){
         return res.status(422).send({error: "please fill all the mandatory fields"});
     }
 
     //creating new user 
     const user = new User({name : name, email, work, from, password});
-
     // user.save().then(() =>{
     //     res.json({message: "user successfully registered"})
     // }).catch((err) =>{
@@ -39,7 +40,7 @@ router.post('/register', async (req, res) =>{
         
         //miidleware should be called for bcrypting
         const userRes = await user.save();
-
+        //console.log(userRes.password);
         if(userRes){
         res.send({message: "user successfully registered"})
         }
@@ -62,14 +63,20 @@ router.post('/signin', async (req, res) =>{
     }
 
     try{
-    const userExist = await User.findOne({email: email, password:password});
-
+    const userExist = await User.findOne({email: email});
     if(userExist){
+        const passMatch = await bcrypt.compare(password, userExist.password);
+        
+        if(passMatch){
         console.log(userExist);
         return res.send(userExist);
+        }
+        else{
+            res.send("invalid password"); //PS- instead print invalid credentials.
+        }
     }
     else{
-        return res.send("username/ password is incorrect")
+        return res.send("user not registered")
     }
     }catch(err){
         console.log(err);

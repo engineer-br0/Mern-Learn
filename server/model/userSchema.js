@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const bcrypt = require('bcryptjs');
+const bcrypt = require('bcrypt');
 
 const userSchema = mongoose.Schema({
    name:{
@@ -23,13 +23,12 @@ const userSchema = mongoose.Schema({
 userSchema.pre('save',async function(next){
    //Do not declare methods using ES6 arrow functions (=>).
    // Arrow functions explicitly prevent binding this, so your method will not have access to the document
-   console.log("hello from pre save");
-   console.log(this.password);
+   //console.log("hello from pre save");
    if(this.isModified('password')){
-      this.password = await bcrypt.hash(this.password, 12);
+      this.password = await bcrypt.hash(this.password, 0);
    }
    next();
-   console.log("hello from after save");
+   //console.log("hello from after save");
 })
 
 const User = mongoose.model('USER', userSchema);
