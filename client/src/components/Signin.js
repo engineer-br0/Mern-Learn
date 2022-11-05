@@ -14,7 +14,10 @@ const Signin = () =>{
     return(
         <>
         <div className="bg-warning">hii im Signin</div>
-        <form onSubmit={() => {console.log(user);}}>
+        <form onSubmit={(e) => {
+            e.preventDefault();
+            console.log(user);
+            }}>
             
             <div>
             <label>

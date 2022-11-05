@@ -14,7 +14,7 @@ const Nav = () =>{
             <div className="container">
                <a href='/' className="">Home</a>
                <Link to='/about'>About me</Link>
-               <Link to="/register">Register</Link>
+               <Link to="/signup">Register</Link>
                <Link to="/signin">sign in</Link>
             </div>
         </div>

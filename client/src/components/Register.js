@@ -9,14 +9,40 @@ const Register = () =>{
         password:"",
         from:"",
         work:"",
-        class:""
+        classa:""
     })
+
+    const postData = async(e) =>{
+        e.preventDefault();
+
+        const {name, email, password, from, work, classa} = user;
+
+        const res = await fetch("/register", {
+            method: "POST",
+            headers:{
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(user)
+        })
+
+        const data = await res.json(
+            {name, email, password, from, work, classa}
+        );
+
+        console.log(data);
+    }
 
 
     return(
         <>
         <div className="bg-primary">hii im Register</div>
-        <form onSubmit={() => {console.log(user)}}>
+        <form
+        method="POST"
+        onSubmit={(e) => {
+            e.preventDefault();
+            console.log(user);
+            postData(e);
+            }}>
             <div>
             <label>
                 name
@@ -82,11 +108,11 @@ const Register = () =>{
                 class
             </label>
             <input
-             value= {user.class}
+             value= {user.classa}
              onChange = {(e) => {
-                setUser({...user, class: e.target.value});
+                setUser({...user, classa: e.target.value});
              }}
-             placeholder="enter your class"
+             placeholder="enter your classa"
             />
             </div>
 
