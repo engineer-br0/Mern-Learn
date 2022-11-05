@@ -10,7 +10,7 @@ router.get('/',  (req, res) =>{
 
 let token;
 router.get('/register',  (req, res) =>{
-    res.cookie("jwtoken", token);
+    //res.cookie("jwtoken", token);
     res.send("hello from router register");
 })
 
