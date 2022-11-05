@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const Signin = () =>{
     const [user, setUser] = useState({
@@ -6,12 +6,15 @@ const Signin = () =>{
         password:""
     })
 
+    // useEffect(() =>{
+    //     console.log(user);
+    // },[user]);
+    
+
     return(
         <>
         <div className="bg-warning">hii im Signin</div>
-
-        <div className="bg-primary">hii im Register</div>
-        <form onSubmit={() => {}}>
+        <form onSubmit={() => {console.log(user);}}>
             
             <div>
             <label>

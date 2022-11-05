@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const Register = () =>{
 
@@ -12,10 +12,11 @@ const Register = () =>{
         class:""
     })
 
+
     return(
         <>
         <div className="bg-primary">hii im Register</div>
-        <form onSubmit={() => {}}>
+        <form onSubmit={() => {console.log(user)}}>
             <div>
             <label>
                 name
