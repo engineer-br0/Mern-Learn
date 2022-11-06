@@ -15,8 +15,6 @@ const Register = () =>{
     const postData = async(e) =>{
         e.preventDefault();
 
-        const {name, email, password, from, work, classa} = user;
-
         const res = await fetch("/register", {
             method: "POST",
             headers:{
@@ -25,9 +23,7 @@ const Register = () =>{
             body: JSON.stringify(user)
         })
 
-        const data = await res.json(
-            {name, email, password, from, work, classa}
-        );
+        const data = await res.json();
 
         console.log(data);
     }
