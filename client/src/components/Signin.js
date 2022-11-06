@@ -9,14 +9,31 @@ const Signin = () =>{
     // useEffect(() =>{
     //     console.log(user);
     // },[user]);
+
+    const loginUser = async (e) =>{
+        console.log('start')
+        const res =  await fetch("/signin", {
+            method: "POST",
+            headers:{
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(user)
+        })
+        
+       // const data = await res.json();
+        console.log(res);
+            
+    }
     
 
     return(
         <>
         <div className="bg-warning">hii im Signin</div>
-        <form onSubmit={(e) => {
+        <form
+        method="POST"
+        onSubmit={(e) => {
             e.preventDefault();
-            console.log(user);
+            loginUser(e);
             }}>
             
             <div>

@@ -14,7 +14,6 @@ const Register = () =>{
 
     const postData = async(e) =>{
         e.preventDefault();
-
         const res = await fetch("/register", {
             method: "POST",
             headers:{
@@ -22,9 +21,8 @@ const Register = () =>{
             },
             body: JSON.stringify(user)
         })
-
         const data = await res.json();
-
+        
         console.log(data);
     }
 
@@ -36,7 +34,6 @@ const Register = () =>{
         method="POST"
         onSubmit={(e) => {
             e.preventDefault();
-            console.log(user);
             postData(e);
             }}>
             <div>
