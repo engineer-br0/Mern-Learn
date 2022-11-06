@@ -20,8 +20,8 @@ router.post('/register', async (req, res) =>{
      
     const {name, email, password, work, from} = req.body;
     
-    if(!name || !email || !password){
-        return res.status(422).send({error: "please fill all the mandatory fields"});
+    if(!name || !email || !password || !from || !work){
+        return res.status(422).send({message: "please fill all the mandatory fields"});
     }
 
     //creating new user 
@@ -35,7 +35,7 @@ router.post('/register', async (req, res) =>{
     try{
         const userExist = await User.findOne({email: email});
         if(userExist){
-            return res.status(422).send({error: "user already registered"});
+            return res.status(422).send({message: "user already registered"});
         }
          
         
@@ -46,7 +46,7 @@ router.post('/register', async (req, res) =>{
         res.send({message: "user successfully registered"})
         }
         else{
-        res.send({error: "failed to register"})
+        res.send({message: "failed to register"})
         }
     } catch(err){
     console.log(err);
@@ -60,7 +60,7 @@ router.post('/signin', async (req, res) =>{
     const { email, password} = req.body;
 
     if(!email || !password){
-        return res.send("please fill all mandatory fields");
+        return res.send({message: "please fill all mandatory fields"});
     }
 
     try{
@@ -74,14 +74,14 @@ router.post('/signin', async (req, res) =>{
 
         //res.cookie("jwtoken", "token");
         console.log(userExist);
-        return res.send(userExist);
+        return res.send({message : "login successfully"});
         }
         else{
-            res.send("invalid password"); //PS- instead print invalid credentials.
+            res.send({message:"invalid password"}); //PS- instead print invalid credentials.
         }
     }
     else{
-        return res.send("user not registered")
+        return res.send({message:"user not registered"})
     }
     }catch(err){
         console.log(err);

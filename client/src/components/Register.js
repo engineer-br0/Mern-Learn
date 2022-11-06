@@ -1,15 +1,16 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import {useNavigate} from 'react-router-dom';
 
 const Register = () =>{
+    const navigate = useNavigate();
 
     const [user, setUser] = useState({
         name:"",
         email:"",
         password:"",
         from:"",
-        work:"",
-        classa:""
+        work:""
     })
 
     const postData = async(e) =>{
@@ -24,6 +25,10 @@ const Register = () =>{
         const data = await res.json();
         
         console.log(data);
+        window.alert(data.message);
+        if(data.message === "user successfully registered"){
+            navigate("/signin");
+        }
     }
 
 
@@ -96,18 +101,7 @@ const Register = () =>{
              placeholder="enter your work"
             />
              </div>
-             <div>
-            <label>
-                class
-            </label>
-            <input
-             value= {user.classa}
-             onChange = {(e) => {
-                setUser({...user, classa: e.target.value});
-             }}
-             placeholder="enter your classa"
-            />
-            </div>
+             
 
             <button className="bg-success text-danger">Submit</button>
         </form>

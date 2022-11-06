@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Signin = () =>{
+    const navigate = useNavigate();
     const [user, setUser] = useState({
         email:"",
         password:""
@@ -11,7 +13,6 @@ const Signin = () =>{
     // },[user]);
 
     const loginUser = async (e) =>{
-        console.log('start')
         const res =  await fetch("/signin", {
             method: "POST",
             headers:{
@@ -20,8 +21,13 @@ const Signin = () =>{
             body: JSON.stringify(user)
         })
         
-       // const data = await res.json();
+       const data = await res.json();
         console.log(res);
+        console.log(data);
+        window.alert(data.message);
+        if(data.message === "login successfully"){
+            navigate('/');
+        }
             
     }
     
