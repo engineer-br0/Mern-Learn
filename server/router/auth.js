@@ -8,7 +8,7 @@ router.get('/',  (req, res) =>{
     
 })
 
-let token;
+var token;
 router.get('/register',  (req, res) =>{
     //res.cookie("jwtoken", token);
     res.send("hello from router register");
@@ -72,7 +72,7 @@ router.post('/signin', async (req, res) =>{
 
         token = await userExist.generateAuthToken();
 
-        //res.cookie("jwtoken", "token");
+        res.cookie("jwtoken", token);
         console.log(userExist);
         return res.send({message : "login successfully"});
         }
