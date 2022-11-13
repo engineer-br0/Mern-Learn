@@ -1,7 +1,9 @@
 const express = require("express");
+const cookieParser = require('cookie-parser');
 require("dotenv").config();
 
 const app = express();
+app.use(cookieParser())
 
 const PORT = process.env.PORT;
 
@@ -26,9 +28,7 @@ const middleware = (req, res, next) =>{
 //     res.send("hello from server home");
 // })
 
-app.get('/about', middleware, (req, res) =>{
-    res.send("hello from about");
-})
+
 
 app.get('/contact', (req, res) =>{
     res.send("hello from contact");

@@ -1,14 +1,16 @@
 const express = require('express');
+const cookieParser = require('cookie-parser');
 const router = express.Router();
 const bcrypt = require('bcrypt');
 const User = require('../model/userSchema');
+const Authenticate = require('../Middleware/Authenticate');
 
 router.get('/',  (req, res) =>{
     res.send("hello from router home");
     
 })
 
-var token;
+
 router.get('/register',  (req, res) =>{
     //res.cookie("jwtoken", token);
     res.send("hello from router register");
@@ -70,11 +72,10 @@ router.post('/signin', async (req, res) =>{
         
         if(passMatch){ //successfully sign in
 
-        token = await userExist.generateAuthToken();
-
+        const token = await userExist.generateAuthToken();
         res.cookie("jwtoken", token);
         console.log(userExist);
-        return res.send({message : "login successfully"});
+        return res.send({message : "User login successfully"});
         }
         else{
             res.send({message:"invalid password"}); //PS- instead print invalid credentials.
@@ -86,6 +87,12 @@ router.post('/signin', async (req, res) =>{
     }catch(err){
         console.log(err);
     }
+})
+
+//about ka page
+router.get('/about', Authenticate , (req, res) =>{
+    res.send("hello from about");
+    //res.send(req.rootUser);
 })
 
 module.exports = router;
