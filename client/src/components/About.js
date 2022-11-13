@@ -6,7 +6,7 @@ const About = () =>{
 
     const callAboutPage = async () =>{
         try{
-            const res = fetch('/about', {
+            const res = await fetch('/about', {
                 method: 'GET',
                 headers:{
                     Accept: "application/json",
@@ -14,15 +14,16 @@ const About = () =>{
                 },
                 credentials : "include"
             });
-
-            const data = (await res).json;
-            //console.log(res);
-            console.log(data);
-            if((await res).status === 401){
+            //const data = await res.json();
+            console.log(res);
+            console.log(res.statusText);
+            if(res.status === 401){
+                
             navigate('/signin');
             }
 
         } catch(err){
+            console.log("5");
             console.log(err);
             navigate('/');
         }

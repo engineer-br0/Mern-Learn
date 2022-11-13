@@ -18,10 +18,10 @@ app.use(require('./router/auth'));
 
 //Middleware
 
-const middleware = (req, res, next) =>{
-    console.log("hello from miidleware");
-    next();
-}
+// const middleware = (req, res, next) =>{
+//     console.log("hello from miidleware");
+//     next();
+// }
 
 //routing
 // app.get('/',  (req, res) =>{
