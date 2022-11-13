@@ -1,8 +1,10 @@
-import React, {useEffect} from "react";
+import React, {useState ,useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 
 const About = () =>{
     const navigate = useNavigate();
+
+    const [userData, setUser] = useState({});
 
     const callAboutPage = async () =>{
         try{
@@ -14,16 +16,17 @@ const About = () =>{
                 },
                 credentials : "include"
             });
-            //const data = await res.json();
+            const data = await res.json();
+            console.log(data);
+            setUser(data);
             console.log(res);
             console.log(res.statusText);
             if(res.status === 401){
-                
+              window.alert(data.message);
             navigate('/signin');
             }
 
         } catch(err){
-            console.log("5");
             console.log(err);
             navigate('/');
         }
@@ -35,7 +38,11 @@ const About = () =>{
 
     return(
         <>
-        <div className="bg-danger">hii im About</div>
+        <div className="bg-danger">hii im About
+          <div> welcome {userData.name} </div>
+          <div> your email is {userData.email}</div>
+          <div> Bye {userData.name}</div>
+          </div>
         </>
 
     );
