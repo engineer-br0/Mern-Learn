@@ -95,4 +95,9 @@ router.get('/about', Authenticate , (req, res) =>{
     res.send(req.rootUser);
 })
 
+router.get('/pullDataFromMongo', Authenticate, (req, res) =>{
+    console.log("hello from router contact");
+    res.send(req.rootUser);
+})
+
 module.exports = router;
