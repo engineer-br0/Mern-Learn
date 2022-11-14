@@ -15,7 +15,8 @@ const Nav = () =>{
                <a href='/' className="">Home</a>
                <Link to='/about'>About me</Link>
                <Link to="/signup">Register</Link>
-               <Link to="/signin">sign in</Link>
+               <Link to="/signin">Sign in</Link>
+               <Link to='/contact' > Contact us</Link>
             </div>
         </div>
         
