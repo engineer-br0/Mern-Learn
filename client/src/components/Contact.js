@@ -42,7 +42,8 @@ const Contact = () =>{
         hii i am contact page
     </div>
     <div>
-        <div>
+    <form>
+        <div >
            <label>name</label>
            <input 
            value={user.name}
@@ -80,6 +81,10 @@ const Contact = () =>{
               placeholder="enter your message"
               ></input>
         </div>
+
+        <button>Submit</button>
+
+        </form>
     </div>
     </>
 )}
