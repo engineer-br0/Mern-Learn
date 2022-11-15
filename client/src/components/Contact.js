@@ -6,6 +6,29 @@ const Contact = () =>{
 
     const [user, setUser] = useState({});
 
+    const sendToMongo = async(e) =>{
+e.preventDefault();
+        const url = '/pullDataFromMongo';
+        const res =  await fetch(url, {
+            method : 'POST',
+            headers : {
+                "Content-Type" : "application/json"
+            },
+            body : JSON.stringify(user)
+        });
+
+        const data = res.json();
+        console.log(data);
+        console.log(res);
+
+        if(res.status === 201){
+            window.alert("message sent!");
+        }
+        else{
+            window.alert(data);
+        }
+    }
+
     const pullDataFromMongo = async () =>{
         try{
             const res = await fetch('/pullDataFromMongo', {
@@ -22,8 +45,8 @@ const Contact = () =>{
             console.log(res);
             console.log(res.statusText);
 
-            if(res.status != 401){
-                setUser(data);
+            if(res.status !== 401){
+                setUser({...user, name:data.name, email: data.email});
               }
 
         } catch(err){
@@ -42,7 +65,7 @@ const Contact = () =>{
         hii i am contact page
     </div>
     <div>
-    <form>
+    <form method="POST" onSubmit={(e) => sendToMongo(e)}>
         <div >
            <label>name</label>
            <input 
@@ -78,6 +101,9 @@ const Contact = () =>{
            <label>message</label>
            <input 
               value={user.message} 
+              onChange={(e) =>{
+                setUser({...user, message:e.target.value});
+              }}
               placeholder="enter your message"
               ></input>
         </div>

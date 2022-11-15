@@ -100,4 +100,19 @@ router.get('/pullDataFromMongo', Authenticate, (req, res) =>{
     res.send(req.rootUser);
 })
 
+router.post('/pullDataFromMongo', Authenticate ,async (req, res) =>{
+    console.log(req.body);
+    //res.send({mess : 'hello we are sending your data', body : req.body});
+
+    const {name, email, phone, message} = req.body;
+    if(!email || !name || !phone || !message){
+        return res.send({message :"please fill all the mandatory fields"});
+    }
+
+    const usr = await User.findOne({email : req.rootUser.email});
+    const resp = usr.addMessage({email, name, phone, message});
+    return res.status(201).send({message : "message sent"});
+
+})
+
 module.exports = router;

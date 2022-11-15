@@ -15,10 +15,33 @@ const userSchema = mongoose.Schema({
       type: String,
       required: true
    },
+   phone:{
+      type: Number,
+   },
    work:{
       type: String,
       required: true
    },
+   messages: [
+      {
+      email:{
+         type: String,
+         required: true
+      },
+      name:{
+         type: String,
+         required: true
+        },
+        phone:{
+         type: Number,
+         required: true
+      },
+      message :{
+         type: String,
+         required: true
+      }
+      }
+   ],
    tokens:[
       {
          token:{
@@ -39,6 +62,17 @@ userSchema.pre('save',async function(next){
    next();
    //console.log("hello from after save");
 })
+
+userSchema.methods.addMessage = async function(credentials){
+   try{
+      this.messages = this.messages.concat(credentials);
+      await this.save();
+      return this.messages;
+   }
+   catch(err){
+      console.log(err);
+   }
+}
 
 userSchema.methods.generateAuthToken = async function() {
    try{
