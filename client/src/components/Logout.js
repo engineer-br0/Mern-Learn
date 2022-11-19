@@ -18,7 +18,7 @@ const Logout = () =>{
         console.log(res);
         window.alert(data.mess);
         if(res.status === 200){
-            navigate('/');
+            navigate('/signin');
         }
     }
     catch(err){
