@@ -110,7 +110,7 @@ router.post('/pullDataFromMongo', Authenticate ,async (req, res) =>{
     }
 
     const usr = await User.findOne({email : req.rootUser.email});
-    const resp = usr.addMessage({email, name, phone, message});
+    const resp = await usr.addMessage({email, name, phone, message});
     return res.status(201).send({message : "message sent"});
 
 })
