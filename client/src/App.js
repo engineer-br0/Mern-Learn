@@ -6,6 +6,7 @@ import About from './components/About';
 import Register from './components/Register';
 import Signin from './components/Signin';
 import Contact from './components/Contact';
+import Logout from './components/Logout';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
       <Route  path='/signin' element={<Signin/>} />
       <Route  path='/signup' element={<Register/>} />
       <Route path='/contact' element={<Contact/>} />
+      <Route path='/logout' element={<Logout/>} />
 
       </Routes>
       

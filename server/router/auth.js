@@ -113,6 +113,16 @@ router.post('/pullDataFromMongo', Authenticate ,async (req, res) =>{
     const resp = await usr.addMessage({email, name, phone, message});
     return res.status(201).send({message : "message sent"});
 
+});
+
+router.get('/logout', (req, res) =>{
+    try{
+    res.clearCookie('jwtoken');
+    res.status(200).send({mess :"logout successfully"});
+    }
+    catch(err){
+        res.status(401).send({mess : "error"});
+    }
 })
 
 module.exports = router;

@@ -17,6 +17,7 @@ const Nav = () =>{
                <Link to="/signup">Register</Link>
                <Link to="/signin">Sign in</Link>
                <Link to='/contact' > Contact us</Link>
+               <Link to='/logout' >Logout</Link>
             </div>
         </div>
         
