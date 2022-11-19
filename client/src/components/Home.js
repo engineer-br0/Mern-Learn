@@ -5,15 +5,23 @@ const Home = () =>{
 
     const getData = async() =>{
         const url = '/pullDataFromMongo';
+        try{
         const res = await fetch(url, {
             method : 'GET',
             headers : {
                 "Content-Type" : "application/json"
             }
         });
-
+        if(res.status === 401) console.log("user not found");
+        else{
         const data = await res.json();
         setName (data.name);
+        }
+
+    }catch(err){
+        console.log(err);
+        window.alert(err);
+    }
     }
 
     useEffect(() => {
