@@ -44,4 +44,11 @@ app.get('/signup', (req, res) =>{
 
 app.listen(PORT, () =>{
     console.log(`server is runniing on PORT ${PORT}`);
-})
+});
+
+//deploy heroku step-5
+if(process.env.NODE_ENV === "production"){
+    app.use(express.static("client/build"));
+}
+
+
