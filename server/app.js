@@ -47,8 +47,8 @@ app.listen(PORT, () =>{
 });
 
 //deploy heroku step-5
-if(process.env.NODE_ENV === "production"){
-    app.use(express.static("client/build"));
-}
+// if(process.env.NODE_ENV === "production"){
+//     app.use(express.static("client/build"));
+// }
 
 
