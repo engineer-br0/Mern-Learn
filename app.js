@@ -5,7 +5,7 @@ require("dotenv").config();
 const app = express();
 app.use(cookieParser())
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT ;
 
 //connecting mongodb database
 require('./db/conn');
